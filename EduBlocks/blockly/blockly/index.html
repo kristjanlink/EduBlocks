@@ -1,0 +1,183 @@
+<html>
+  <head>
+    <!-- A simple CSS stylesheet to style the page with a header and footer. -->
+    <link rel="stylesheet" href="style.css">
+
+    <!-- The main Blockly files -->
+    <script src="blockly/blockly_uncompressed.js"></script>
+    <script src="blockly/msg/js/en.js"></script>
+
+    <!-- These are the files that define what blocks Blockly has. If you want to
+    add your own blocks, you'll need to create a new file and link it here. -->
+    <script src="blockly/blocks/colour.js"></script>
+    <script src="blockly/blocks/lists.js"></script>
+    <script src="blockly/blocks/logic.js"></script>
+    <script src="blockly/blocks/loops.js"></script>
+    <script src="blockly/blocks/math.js"></script>
+    <script src="blockly/blocks/procedures.js"></script>
+    <script src="blockly/blocks/text.js"></script>
+    <script src="blockly/blocks/variables.js"></script>
+
+    <!-- These are the files that tell Blockly how to convert the blocks into
+    code. Each file is for a different programming language. For example, the
+    python.js file contains the information to convert the blocks into Python,
+    and the php.js one converts them to PHP. If you add your own blocks, you'll
+    either want to create your own file for your block generators, or add them
+    to these files. -->
+    <script src="blockly/generators/dart.js"></script>
+    <script src="blockly/generators/javascript.js"></script>
+    <script src="blockly/generators/lua.js"></script>
+    <script src="blockly/generators/php.js"></script>
+    <script src="blockly/generators/python.js"></script>
+
+    <script src="block_generators.js"></script>
+    <script src="block_definitions.js"></script>
+
+    <style type="text/css">
+    #element1 {float:left;}
+    #element2 {padding-right : 20px; float:right;}
+
+    <title>EduBlocks</title>
+    <<link rel="shortcut icon" href="logo.png">
+    </style>
+  </head>
+  <body>
+    <!-- The main content of the page, containing a header, the main blockly
+    area, and a footer. The blockly area will resize as the page is resized. -->
+    <div id="content">
+      <div id="header">
+
+          <img align="left" src="logo.png" width="60" height="60">
+
+
+
+
+          <input align="right" type="image" onclick="sendCode()"  src="submit.gif" alt="Submit" width=60 height="60">
+
+      </div>
+      <div id="blockly">
+        <div id="blocklyArea"></div>
+        <div id="blocklyDiv" style="position: absolute"></div>
+      </div>
+    </div>
+
+    <!-- The Blockly toolbox, which is where blocks are dragged out from. If you
+    add your own blocks, you'll need to add them here as well. -->
+    <xml id="toolbox" style="display: none">
+      <category name="General" colour="336">
+      	
+        <block type="while_true"></block>
+        <block type="sleep"></block>
+        <block type="print"></block>
+      </category>
+      <category name="EduPy" colour="60">
+      	<category name="General" colour="336">
+        	
+        	<block type="import_edupy"></block>
+                <block type="sen"></block>
+        	
+        	
+        </category>
+      
+      	<category name="Kit 1" colour="196">
+        	<block type="led_on"></block>
+        	<block type="led_off"></block>
+        	<block type="button_pressed"></block>
+        	<block type="all_on"></block>
+        	<block type="all_off"></block>
+        	<block type="all_blink"></block>
+        	<block type="button"></block>
+        	<block type="buzzer"></block>
+        	<block type="blink"></block>
+        	<block type="user_input"></block>
+        	<block type="crossing"></block>
+        	<block type="dot"></block>
+        	<block type="dash"></block>
+        	<block type="letter"></block>
+        	<block type="word"></block>
+        </category>
+        <category name="Kit 2" colour="45">
+        	<block type="2led_on"></block>
+        	<block type="2led_off"></block>
+                <block type="2buzzer"></block>
+        	<block type="temperature"></block>
+        	<block type="ldr"></block>
+        	<block type="capacitor"></block>
+        	<block type="motion"></block>
+        	<block type="alarm"></block>
+        </category>
+        <category name="Kit 3" colour="120">
+        	<block type="forward"></block>
+        	<block type="backward"></block>
+        	<block type="turn_left"></block>
+        	<block type="turn_right"></block>
+        	<block type="stop"></block>
+        	<block type="get_reading"></block>
+       		<block type="line_test"></block>
+        	<block type="key_control"></block>
+        	<block type="line_follower"></block>
+            <block type="avoid"></block>
+        </category>
+    </category>
+    <category name="Minecraft" colour="120">
+    	<category name="General" colour="336">
+        	<block type="mcimport"></block>
+                <block type="mccreate"></block>
+        	
+        </category>
+        <category name="Commands" colour="120">
+        	<block type="mcpost"></block>
+                <block type="mcpos"></block>
+                <block type="varprint"></block>
+                <block type="setpos"></block>
+                <block type="getblock"></block>
+                <block type="setblock"></block>
+                <block type="mcvar"></block>
+                <block type="mctext"></block>
+                <block type="mcblocks"></block>
+        </category>
+    </category>
+    	
+    	
+    </xml>
+
+    <!-- The script to add blockly to the page. It's a little more complicated
+    than the standard blockly one as it makes the blockly div resize as the page
+    is resized, rather than being a fixed size. -->
+    <script>
+      var blocklyArea = document.getElementById('blocklyArea');
+      var blocklyDiv = document.getElementById('blocklyDiv');
+      var workspace = Blockly.inject(blocklyDiv,{
+        media: 'blockly/media/',
+        toolbox: document.getElementById('toolbox')
+      });
+      var onresize = function(e) {
+        // Compute the absolute coordinates and dimensions of blocklyArea.
+        var element = blocklyArea;
+        var x = 0;
+        var y = 0;
+        do {
+          x += element.offsetLeft;
+          y += element.offsetTop;
+          element = element.offsetParent;
+        } while (element);
+        // Position blocklyDiv over blocklyArea.
+        blocklyDiv.style.left = x + 'px';
+        blocklyDiv.style.top = y + 'px';
+        blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+        blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
+        Blockly.svgResize(workspace);
+      };
+      window.addEventListener('resize', onresize, false);
+      onresize();
+
+      function sendCode() {
+        var code = encodeURIComponent(Blockly.Python.workspaceToCode());
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "http://127.0.0.1:8080/runcode", true);
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("code=" + code);
+      }
+    </script>
+  </body>
+</html>
