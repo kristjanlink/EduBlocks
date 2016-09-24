@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=EduBlocks
+Comment=Making the transition from Scratch to Python easier.
+Exec=sudo /home/pi/blockly/test.sh
+Icon=/home/pi/blockly/blockly/logo.png
+Terminal=true
+Type=Application
+Categories=Application;
