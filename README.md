@@ -1,12 +1,12 @@
-<img src="githubrepobanner.png" alt="Oh Drat! You browser has failed to load the image :)" height="42" width="42"> 
+<img src="githubrepobanner.png" alt="Oh Drat! You browser has failed to load the image :)"> 
 
 <h1>EduBlocks - Making the transition from Scratch to Python</img>
 
-<p1>To download EduBlocks:</p1>
+<h1>To download EduBlocks:</h1>
 <code>wget http://edupython.co.uk/install.sh</code>
-<p1>&</p1>
+<h1>&</h1>
 <code>sudo bash install.sh</code>
-<p1>Double click the Icon and go, go, go</p1>
+<h1>Double click the Icon and go, go, go</h1>
 
 <h1>Issues:</h1>
 
