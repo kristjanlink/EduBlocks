@@ -1,4 +1,4 @@
-<img src="githubrepobanner.png" alt="Oh Drat! You browser has failed to load the image :)"> 
+<img src="githubrepobanner.png" alt="EDUBLOCKS Making the transition from scratch to python easier.">
 
 <h1>EduBlocks - Making the transition from Scratch to Python</img>
 
